@@ -5,22 +5,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import com.example.saryandroidchallenge.R
 import com.example.saryandroidchallenge.adapters.BannerPageAdapter
 import com.example.saryandroidchallenge.app.base.DataState
+import com.example.saryandroidchallenge.databinding.MainFragmentBinding
 import com.example.saryandroidchallenge.remote.models.Result
 import com.example.saryandroidchallenge.ui.main.view_model.MainViewModel
-import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.error_layout.*
+import kotlinx.android.synthetic.main.main_fragment.*
 import org.koin.android.ext.android.inject
 
 class MainFragment : Fragment() {
 
+    private lateinit var binding: MainFragmentBinding
     private val viewModel by inject<MainViewModel>()
     private lateinit var bannerPageAdapter: BannerPageAdapter
-    private lateinit var bannerSlider: ViewPager
-    private lateinit var dotsLayout: TabLayout
 
     companion object {
         fun newInstance() = MainFragment()
@@ -30,10 +31,8 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.main_fragment, container, false)
-        bannerSlider = view.findViewById(R.id.banner_slider)
-        dotsLayout = view.findViewById(R.id.banner_indicator)
-        return view
+        binding = MainFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,23 +40,19 @@ class MainFragment : Fragment() {
 
         observeBanners()
         bannerPageAdapter = BannerPageAdapter(requireContext())
-        bannerSlider.adapter = bannerPageAdapter
-        dotsLayout.setupWithViewPager(bannerSlider)
+        banner_slider.adapter = bannerPageAdapter
+        banner_indicator.setupWithViewPager(banner_slider)
     }
 
     private fun observeBanners() {
         viewModel.refreshBanners().observe(viewLifecycleOwner) {
             when (it.getStatus()) {
-
                 DataState.DataStatus.LOADING -> {
-                    Log.d("tag", it.getData()?.status.toString().plus(" loading"))
+                    showOrHideLoading(isLoading = true)
                 }
 
                 DataState.DataStatus.SUCCESS -> {
-                    Log.d("tag",
-                        it.getData()?.status.toString().plus(it.getData()?.result?.size)
-                            .plus(" success")
-                    )
+                    showOrHideLoading()
                     it.getData()?.result.let { data ->
                         data?.let { list ->
                             bannerPageAdapter.setBanners(list as ArrayList<Result>)
@@ -67,16 +62,24 @@ class MainFragment : Fragment() {
                 }
 
                 DataState.DataStatus.ERROR -> {
-                    Log.d("tag", it.getData()?.status.toString())
+                    showOrHideLoading(hasIssue = true, txt = getString(R.string.error))
                 }
 
                 DataState.DataStatus.NO_INTERNET -> {
-                    Log.d("tag", it.getData()?.status.toString())
+                    showOrHideLoading(hasIssue = true, txt = getString(R.string.no_internet))
                 }
-
-
             }
         }
     }
 
+    private fun showOrHideLoading(
+        isLoading: Boolean = false,
+        hasIssue: Boolean = false,
+        txt: String = ""
+    ) {
+        progress.isVisible = isLoading
+        tvIssue.isVisible = hasIssue
+        tvIssue.text = txt
+        bannerContainer.isVisible = !isLoading && !hasIssue
+    }
 }
