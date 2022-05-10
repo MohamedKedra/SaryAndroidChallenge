@@ -2,7 +2,9 @@ package com.example.saryandroidchallenge.app.di
 
 import android.content.Context
 import android.net.ConnectivityManager
+import com.example.saryandroidchallenge.remote.SaryService
 import com.example.saryandroidchallenge.utils.Constants
+import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -15,12 +17,10 @@ val appModule = module {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
-
-
     }
 
     single {
-        get<Retrofit>().create(SaryApp::class.java)
+        get<Retrofit>().create(SaryService::class.java)
     }
 
     single {

@@ -3,6 +3,7 @@ package com.example.saryandroidchallenge.app.di
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import com.example.saryandroidchallenge.ui.main.di.mainModule
 
 class SaryApp : Application() {
 
@@ -12,7 +13,8 @@ class SaryApp : Application() {
             androidContext(this@SaryApp)
             modules(
                 listOf(
-                    appModule
+                    appModule,
+                    mainModule
                 )
             )
         }
