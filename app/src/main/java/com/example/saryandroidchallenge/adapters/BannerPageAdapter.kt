@@ -7,21 +7,28 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.example.saryandroidchallenge.R
+import com.example.saryandroidchallenge.remote.models.Result
 
 
 class BannerPageAdapter(
-    private val context: Context,
-    private val banners: List<Int>
+    private val context: Context
 ) : PagerAdapter() {
+
+    private var banners = ArrayList<Result>()
+
+    fun setBanners(banners: ArrayList<Result>) {
+        this.banners = banners
+    }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
 
         val view =
             LayoutInflater.from(context).inflate(R.layout.banner_item_layout, container, false)
-
+        val item = banners[position]
         val banner = view.findViewById<AppCompatImageView>(R.id.iv_banner)
-        banner.setImageResource(banners[position])
+        Glide.with(context).load(item.image).into(banner)
         val vp = container as ViewPager
         vp.addView(view, 0)
         return view
