@@ -1,6 +1,7 @@
 package com.example.saryandroidchallenge.ui.main.view_model
 
 import android.net.ConnectivityManager
+import android.util.Log
 import com.example.saryandroidchallenge.app.base.BaseViewModel
 import com.example.saryandroidchallenge.app.base.LiveDataState
 import com.example.saryandroidchallenge.remote.models.BannerResponse
@@ -63,6 +64,7 @@ class MainViewModel(
                 .observeOn(AndroidSchedulers.mainThread()).subscribeWith(
                     object : DisposableSingleObserver<CategoryResponse>() {
                         override fun onSuccess(response: CategoryResponse) {
+                            Log.d("res",response.toString())
                             publishResult(categoriesDataList, response)
                         }
 

@@ -3,14 +3,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginHorizontal="@dimen/margin_16"
     android:layout_marginTop="@dimen/padding_8"
     android:orientation="vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="@dimen/image_size"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/padding_8"
         android:src="@drawable/filter_container" />

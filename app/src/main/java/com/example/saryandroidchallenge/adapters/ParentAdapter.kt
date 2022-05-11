@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.saryandroidchallenge.databinding.ParentItemLayoutBinding
 import com.example.saryandroidchallenge.remote.models.Category
@@ -20,9 +21,16 @@ class ParentAdapter(private val context: Context) :
         fun bind(category: Category) {
             with(binding) {
 
-                rvCategory.layoutManager =
-                    category.row_count?.let { GridLayoutManager(context, it) }
-                rvCategory.adapter = ChildAdapter()
+                rvCategory.layoutManager = if (category.row_count != null && category.row_count > 1)
+                    GridLayoutManager(context, category.row_count)
+                else
+                    LinearLayoutManager(
+                        context,
+                        RecyclerView.HORIZONTAL, false
+                    )
+                val adapter = ChildAdapter(context)
+                adapter.setCategory(category)
+                rvCategory.adapter = adapter
 
                 category.show_title?.let { hasTitle ->
                     tvParentName.isVisible = hasTitle
