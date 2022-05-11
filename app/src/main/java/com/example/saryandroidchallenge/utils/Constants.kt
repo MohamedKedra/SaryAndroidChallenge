@@ -13,7 +13,7 @@ class Constants {
         const val appVersion = "5.5.0.0.0"
         const val deviceType = "android"
         const val platform = "FLAGSHIP"
-        const val language = "ar"
+        const val language = "en"
         const val token =
             "token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjgxNTEyLCJ1c2VyX3Bob25lIjoiOTY2NTkxMTIyMzM0In0.phRQP0e5yQrCVfZiN4YlkI8NhXRyqa1fGRx5rvrEv0o"
     }
