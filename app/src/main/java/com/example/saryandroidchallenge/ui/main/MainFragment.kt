@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.saryandroidchallenge.R
 import com.example.saryandroidchallenge.adapters.BannerPageAdapter
 import com.example.saryandroidchallenge.adapters.ParentAdapter
 import com.example.saryandroidchallenge.app.base.DataState
 import com.example.saryandroidchallenge.databinding.MainFragmentBinding
+import com.example.saryandroidchallenge.remote.models.Category
 import com.example.saryandroidchallenge.remote.models.Result
 import com.example.saryandroidchallenge.ui.main.view_model.MainViewModel
 import kotlinx.android.synthetic.main.error_layout.*
+import kotlinx.android.synthetic.main.error_list_layout.*
 import kotlinx.android.synthetic.main.main_fragment.*
 import org.koin.android.ext.android.inject
 
@@ -45,6 +46,7 @@ class MainFragment : Fragment() {
         banner_slider.adapter = bannerPageAdapter
         banner_indicator.setupWithViewPager(banner_slider)
 
+        observeCategories()
         parentAdapter = ParentAdapter(requireContext())
         rvMain.adapter = parentAdapter
     }
@@ -77,6 +79,33 @@ class MainFragment : Fragment() {
         }
     }
 
+    private fun observeCategories() {
+        viewModel.refreshCategories().observe(viewLifecycleOwner) {
+            when (it.getStatus()) {
+
+                DataState.DataStatus.LOADING -> {
+                    showOrHideLoadingList(isLoading = true)
+                }
+                DataState.DataStatus.SUCCESS -> {
+                    showOrHideLoadingList()
+                    it?.getData()?.result?.let { list ->
+                        parentAdapter.setCategories(list as ArrayList<Category>)
+                        parentAdapter.notifyDataSetChanged()
+                    }
+                }
+
+                DataState.DataStatus.ERROR -> {
+                    showOrHideLoadingList(hasIssue = true, txt = getString(R.string.error))
+                }
+
+                DataState.DataStatus.NO_INTERNET -> {
+                    showOrHideLoadingList(hasIssue = true, txt = getString(R.string.no_internet))
+
+                }
+            }
+        }
+    }
+
     private fun showOrHideLoading(
         isLoading: Boolean = false,
         hasIssue: Boolean = false,
@@ -86,5 +115,16 @@ class MainFragment : Fragment() {
         tvIssue.isVisible = hasIssue
         tvIssue.text = txt
         bannerContainer.isVisible = !isLoading && !hasIssue
+    }
+
+    private fun showOrHideLoadingList(
+        isLoading: Boolean = false,
+        hasIssue: Boolean = false,
+        txt: String = ""
+    ) {
+        progressList.isVisible = isLoading
+        tvIssueList.isVisible = hasIssue
+        tvIssueList.text = txt
+        rvMain.isVisible = !isLoading && !hasIssue
     }
 }

@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.saryandroidchallenge.databinding.ParentItemLayoutBinding
+import com.example.saryandroidchallenge.remote.models.Category
 
 class ParentAdapter(private val context: Context) :
     RecyclerView.Adapter<ParentAdapter.ParentHolder>() {
+
+    private var categories = ArrayList<Category>()
 
     inner class ParentHolder(private val binding: ParentItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -20,6 +23,10 @@ class ParentAdapter(private val context: Context) :
                 rvCategory.adapter = ChildAdapter()
             }
         }
+    }
+
+    fun setCategories(categories: ArrayList<Category>) {
+        this.categories = categories
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParentHolder {

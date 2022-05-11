@@ -13,4 +13,12 @@ class MainRepository(private val saryService: SaryService) {
             Constants.Header.platform,
             Constants.Header.token
         )
+
+    fun getCategories() = saryService.getCategories(
+        Constants.Header.deviceType,
+        Constants.Header.appVersion,
+        Constants.Header.language,
+        Constants.Header.platform,
+        Constants.Header.token
+    )
 }
