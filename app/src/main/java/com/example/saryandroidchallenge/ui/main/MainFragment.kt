@@ -1,14 +1,15 @@
 package com.example.saryandroidchallenge.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.saryandroidchallenge.R
 import com.example.saryandroidchallenge.adapters.BannerPageAdapter
+import com.example.saryandroidchallenge.adapters.ParentAdapter
 import com.example.saryandroidchallenge.app.base.DataState
 import com.example.saryandroidchallenge.databinding.MainFragmentBinding
 import com.example.saryandroidchallenge.remote.models.Result
@@ -22,6 +23,7 @@ class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
     private val viewModel by inject<MainViewModel>()
     private lateinit var bannerPageAdapter: BannerPageAdapter
+    private lateinit var parentAdapter: ParentAdapter
 
     companion object {
         fun newInstance() = MainFragment()
@@ -42,6 +44,9 @@ class MainFragment : Fragment() {
         bannerPageAdapter = BannerPageAdapter(requireContext())
         banner_slider.adapter = bannerPageAdapter
         banner_indicator.setupWithViewPager(banner_slider)
+
+        parentAdapter = ParentAdapter(requireContext())
+        rvMain.adapter = parentAdapter
     }
 
     private fun observeBanners() {
