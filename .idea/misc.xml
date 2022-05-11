@@ -5,9 +5,14 @@
       <map>
         <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/drawable-v24/dot_selector.xml" value="0.1695" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/drawable/dot_selector.xml" value="0.1695" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/drawable/filter_container.xml" value="0.187" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/layout/ads_item_layout.xml" value="0.144140625" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/layout/banner_item_layout.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/layout/category_item_layout.xml" value="0.18" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/layout/error_layout.xml" value="0.1921875" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/layout/main_fragment.xml" value="0.22" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/layout/filter_layout.xml" value="0.1921875" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/layout/main_fragment.xml" value="0.15" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/SaryAndroidChallenge/app/src/main/res/layout/parent_item_layout.xml" value="0.144140625" />
       </map>
     </option>
   </component>
