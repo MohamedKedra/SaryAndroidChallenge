@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="@dimen/padding_8"
+        android:elevation="@dimen/padding_8"
         android:id="@+id/cvSmart"
         android:layout_width="@dimen/image_size"
         android:layout_height="@dimen/image_size"
@@ -21,7 +23,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/filter_container"/>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvSmart"
