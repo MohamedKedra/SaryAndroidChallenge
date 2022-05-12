@@ -10,10 +10,12 @@ import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.example.saryandroidchallenge.R
 import com.example.saryandroidchallenge.remote.models.Result
+import com.example.saryandroidchallenge.ui.main.view.OnItemClickListener
 
 
 class BannerPageAdapter(
-    private val context: Context
+    private val context: Context,
+    private val onItemClickedListener: OnItemClickListener
 ) : PagerAdapter() {
 
     private var banners = ArrayList<Result>()
@@ -31,6 +33,9 @@ class BannerPageAdapter(
         Glide.with(context).load(item.image).into(banner)
         val vp = container as ViewPager
         vp.addView(view, 0)
+        view.setOnClickListener {
+            onItemClickedListener.onItemClicked(item)
+        }
         return view
     }
 
