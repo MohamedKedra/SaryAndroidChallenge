@@ -28,13 +28,17 @@ class ParentAdapter(private val context: Context) :
                         context,
                         RecyclerView.HORIZONTAL, false
                     )
+
                 val adapter = ChildAdapter(context)
                 adapter.setCategory(category)
                 rvCategory.adapter = adapter
 
+
+
                 category.show_title?.let { hasTitle ->
                     tvParentName.isVisible = hasTitle
                     tvParentName.text = category.title
+                    tvParentName.isVisible = !(category.data != null && category.data.isEmpty())
                 }
             }
         }

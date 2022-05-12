@@ -2,4 +2,6 @@
     <string name="app_name">SaryAndroidChallenge</string>
     <string name="no_internet">No Internet</string>
     <string name="error">Something went Wrong</string>
+    <string name="empty_list">No Item in this Category</string>
+    <string name="retry">Retry</string>
 </resources>

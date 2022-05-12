@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ivGroup"
+    android:layout_width="70dp"
+    android:layout_height="@dimen/image_size"
+    android:layout_gravity="center"
+    android:background="@drawable/filter_container"
+    android:layout_marginTop="@dimen/padding_8"
+    android:scaleType="fitCenter"
+    android:layout_marginBottom="@dimen/padding_8" />
